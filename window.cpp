@@ -1,28 +1,30 @@
 #define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
-#include <glad/gl.h>
+#include "GLFW/glfw3.h"
+#include "deps/glad/gl.h"
 #include <string>
+#include <iostream>
 typedef unsigned int uint; 
 using namespace std;
 
 int main() {
+	GLFWAPI glfwInit();
 	const uint HEIGHT = 600;
 	const uint WIDTH = 800;
-	const string TITLE = "TEST";
-	GLFWwindow* window;
-	if (!glfwInit())
-		return -1;
-	window = glfwCreateWindow(WIDTH, HEIGHT, TITLE, NULL, NULL);
-	if (!window) {
-		glfwTerminate();
+	const char* TITLE = "WINDOW";
+	GLFWwindow* window = GLFWAPI glfwCreateWindow(WIDTH, HEIGHT, TITLE, NULL, NULL);
+	if (window == NULL) {
+		cout<<"Failed to create window"<<endl;
+		GLFWAPI glfwTerminate();
 		return -1;
 	}
-	glfwMakeContextCurrent(window);
-	while (!glfwWindowShouldClose(window)){
-		glClear(GL_COLOR_BUFFER_BIT);
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+	GLFWAPI glfwMakeContextCurrent(window);
+	while (!GLFWAPI glfwWindowShouldClose(window)) {
+		GLFWAPI glfwPollEvents();
+		GLFWAPI glClear(GL_COLOR_BUFFER_BIT);
+		GLFWAPI glfwSwapBuffers(window);
 	}
-	glfwTerminate();
+	GLFWAPI glfwDestroyWindow(window);
+	GLFWAPI glfwTerminate();
 	return 0;
 }
+
