@@ -1,4 +1,5 @@
 #define GLFW_INCLUDE_NONE
+#define GLFW_DLL
 #include "GLFW/glfw3.h"
 #include "deps/glad/gl.h"
 #include <string>
@@ -7,24 +8,24 @@ typedef unsigned int uint;
 using namespace std;
 
 int main() {
-	GLFWAPI glfwInit();
+	glfwInit();
 	const uint HEIGHT = 600;
 	const uint WIDTH = 800;
 	const char* TITLE = "WINDOW";
-	GLFWwindow* window = GLFWAPI glfwCreateWindow(WIDTH, HEIGHT, TITLE, NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, TITLE, NULL, NULL);
 	if (window == NULL) {
 		cout<<"Failed to create window"<<endl;
-		GLFWAPI glfwTerminate();
+		glfwTerminate();
 		return -1;
 	}
-	GLFWAPI glfwMakeContextCurrent(window);
-	while (!GLFWAPI glfwWindowShouldClose(window)) {
-		GLFWAPI glfwPollEvents();
-		GLFWAPI glClear(GL_COLOR_BUFFER_BIT);
-		GLFWAPI glfwSwapBuffers(window);
+	glfwMakeContextCurrent(window);
+	while (!glfwWindowShouldClose(window)) {
+		glfwPollEvents();
+		glClear(GL_COLOR_BUFFER_BIT);
+		glfwSwapBuffers(window);
 	}
-	GLFWAPI glfwDestroyWindow(window);
-	GLFWAPI glfwTerminate();
+	glfwDestroyWindow(window);
+	glfwTerminate();
 	return 0;
 }
 
