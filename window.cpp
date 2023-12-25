@@ -1,9 +1,10 @@
-#define GLFW_INCLUDE_NONE
 #define GLFW_DLL
+#define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 #include "deps/glad/gl.h"
 #include <string>
 #include <iostream>
+
 typedef unsigned int uint; 
 using namespace std;
 
