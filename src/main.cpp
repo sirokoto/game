@@ -1,17 +1,17 @@
 #define GLFW_DLL
 #define GLFW_INCLUDE_NONE
-#include "GLFW/glfw3.h"
-#include "glad/gl.h"
+#include <GLFW/glfw3.h>
+#include <glad/gl.h>
+#include <GL/glu.h>
 #include <string>
 #include <iostream>
 
-typedef unsigned int uint; 
 using namespace std;
 
 int main() {
 	glfwInit();
-	const uint HEIGHT = 600;
-	const uint WIDTH = 800;
+	const unsigned int HEIGHT = 600;
+	const unsigned int WIDTH = 800;
 	const char* TITLE = "WINDOW";
 	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, TITLE, NULL, NULL);
 	if (window == NULL) {
