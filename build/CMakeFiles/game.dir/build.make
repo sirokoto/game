@@ -92,6 +92,9 @@ game_EXTERNAL_OBJECTS =
 
 game: CMakeFiles/game.dir/src/main.cpp.o
 game: CMakeFiles/game.dir/build.make
+game: external/glfw/src/libglfw3.a
+game: /usr/lib/x86_64-linux-gnu/librt.a
+game: /usr/lib/x86_64-linux-gnu/libm.so
 game: CMakeFiles/game.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sirokoto/cpp/game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable game"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/game.dir/link.txt --verbose=$(VERBOSE)

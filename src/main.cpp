@@ -8,7 +8,7 @@
 
 using namespace std;
 
-int main() {
+int main(void) {
 	glfwInit();
 	const unsigned int HEIGHT = 600;
 	const unsigned int WIDTH = 800;
@@ -22,7 +22,7 @@ int main() {
 	glfwMakeContextCurrent(window);
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
-		glClear(GL_COLOR_BUFFER_BIT);
+		//glClear(GL_COLOR_BUFFER_BIT);
 		glfwSwapBuffers(window);
 	}
 	glfwDestroyWindow(window);
