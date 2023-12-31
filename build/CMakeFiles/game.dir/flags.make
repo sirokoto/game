@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/sirokoto/cpp/game/external/glfw/include
+CXX_INCLUDES = -I/home/sirokoto/cpp/game/external/glfw/include -I/home/sirokoto/cpp/game/external/glad/include
 
 CXX_FLAGS = 
 

@@ -93,6 +93,7 @@ game_EXTERNAL_OBJECTS =
 game: CMakeFiles/game.dir/src/main.cpp.o
 game: CMakeFiles/game.dir/build.make
 game: external/glfw/src/libglfw3.a
+game: external/glad/libglad.a
 game: /usr/lib/x86_64-linux-gnu/librt.a
 game: /usr/lib/x86_64-linux-gnu/libm.so
 game: CMakeFiles/game.dir/link.txt

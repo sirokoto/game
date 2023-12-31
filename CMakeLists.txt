@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.22.1 FATAL_ERROR)
 
-project(game)
+set(PROJECT_NAME game)
+
+project(${PROJECT_NAME})
 
 add_executable(game src/main.cpp)
 
@@ -10,4 +12,7 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(external/glfw)
-target_link_libraries(game glfw)
+target_link_libraries(${PROJECT_NAME} glfw)
+
+add_subdirectory(external/glad)
+target_link_libraries(${PROJECT_NAME} glad)

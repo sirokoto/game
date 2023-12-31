@@ -11,6 +11,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.22.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeSystem.cmake"
+  "../external/glad/CMakeLists.txt"
   "../external/glfw/CMake/glfw3.pc.in"
   "../external/glfw/CMake/glfw3Config.cmake.in"
   "../external/glfw/CMakeLists.txt"
@@ -62,6 +63,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "external/glfw/CMakeFiles/CMakeDirectoryInformation.cmake"
   "external/glfw/src/glfw3.pc"
   "external/glfw/src/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "external/glad/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -69,4 +71,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/game.dir/DependInfo.cmake"
   "external/glfw/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   "external/glfw/src/CMakeFiles/update_mappings.dir/DependInfo.cmake"
+  "external/glad/CMakeFiles/glad.dir/DependInfo.cmake"
   )
