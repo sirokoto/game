@@ -1,8 +1,5 @@
-#define GLFW_DLL
-#define GLFW_INCLUDE_NONE
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <glad/gl.h>
-#include <GL/glu.h>
 #include <string>
 #include <iostream>
 
@@ -20,9 +17,19 @@ int main(void) {
 		return -1;
 	}
 	glfwMakeContextCurrent(window);
+
+	if (!gladLoadGL()) {
+		cout<<"Can't load GLAD!"<<endl;
+		return -1;
+	}
+
+	cout<<"OPENGL "<<GLVersion.major<<"."<<GLVersion.minor<<endl;
+
+	glClearColor(0, 0, 1, 1);
+
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
-		//glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT);
 		glfwSwapBuffers(window);
 	}
 	glfwDestroyWindow(window);
