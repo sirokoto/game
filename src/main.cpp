@@ -5,27 +5,51 @@
 
 using namespace std;
 
+unsigned int HEIGHT = 600;
+unsigned int WIDTH = 800;
+const char* TITLE = "GAME";
+
+void glfwWindowSizeCallback(GLFWwindow* window, int height, int width) {
+	HEIGHT = height;
+	WIDTH = width;
+	glViewport(0, 0, width, height);
+}
+
+void glfwKeyCallback(GLFWwindow* window, int key, int action, int scancode, int mode) {
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GL_TRUE);
+}
+
 int main(void) {
-	glfwInit();
-	const unsigned int HEIGHT = 600;
-	const unsigned int WIDTH = 800;
-	const char* TITLE = "WINDOW";
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, TITLE, NULL, NULL);
-	if (window == NULL) {
-		cout<<"Failed to create window"<<endl;
+	if (!glfwInit()) {
+		cerr << "glfwInit failed!" << endl;
+		return -1;
+	}
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+	glfwWindowHint(GLFW_OPENGL_PROFILE,GLFW_OPENGL_CORE_PROFILE);
+
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, TITLE, nullptr, nullptr);
+	if (!window) {
+		cerr<<"Failed to create window"<<endl;
 		glfwTerminate();
 		return -1;
 	}
+
+	glfwSetWindowSizeCallback(window, glfwWindowSizeCallback);
+	glfwSetKeyCallback(window, glfwKeyCallback);
+
 	glfwMakeContextCurrent(window);
 
 	if (!gladLoadGL()) {
-		cout<<"Can't load GLAD!"<<endl;
+		cerr<<"Can't load GLAD!"<<endl;
 		return -1;
 	}
+	cout << "RENDERER: " << glGetString(GL_RENDERER) << endl;
+	cout << "OPENGL " << GLVersion.major << "." << GLVersion.minor << endl;
+	cout << "OPENGL VERSION: " << glGetString(GL_VERSION) << endl;
 
-	cout<<"OPENGL "<<GLVersion.major<<"."<<GLVersion.minor<<endl;
-
-	glClearColor(0, 0, 1, 1);
+	glClearColor(1, 1, 1, 1);
 
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
