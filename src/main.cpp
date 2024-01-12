@@ -7,22 +7,29 @@
 using namespace std;
 
 GLfloat point[] = {
-	-0.5f, 0.5f, 0.0f,  //0
-	0.5f, 0.5f, 0.0f,   //2
-	-0.5f, -0.5f, 0.0f, //1
-//	0.5f, -0.5f, 0.0f,  //3
+	0.5f, 0.5f, 0.0f,     //0
+	-0.5f, 0.5f, 0.0f,    //1
+	-0.5f, -0.5f, 0.0f,   //2
+	0.5f, -0.5f, 0.0f,    //3
 };
 GLfloat colors[] = {
 	1.0f, 0.0f, 0.0f,   //red
 	0.0f, 1.0f, 0.0f,   //green
 	0.0f, 0.0f, 1.0f,   //blue
-//	1.0f, 1.0f, 1.0f    //white
+	1.0f, 1.0f, 1.0f    //white
 };
-//const GLuint indices[] = {0, 1, 2, 2, 1, 3};
+GLuint indices[] = { 0,1,2,0,2,3 };
 
 unsigned int HEIGHT = 600;
 unsigned int WIDTH = 600;
 const char* TITLE = "GAME";
+
+void checkGLError() {
+	GLenum error;
+	while ((error = glGetError()) != GL_NO_ERROR) {
+		cerr<<"OPENGL ERROR"<<error<<endl;
+	}
+}
 
 void glfwWindowSizeCallback(GLFWwindow* window, int height, int width) {
 	HEIGHT = height;
@@ -66,48 +73,59 @@ int main(int argc, char** argv) {
 	glClearColor(0, 0, 0, 1);
 	{
 		ResourceManager resourceManager(argv[0]);
-		auto pDefaultShaderProgram = resourceManager.loadShaders("DefaultShader", "res/shader/vertexShader.txt", "res/shader/fragmentShader.txt");
+		auto pDefaultShaderProgram = resourceManager.loadShaders("DefaultShader", "res/shaders/vertexShader.vert", "res/shaders/fragmentShader.frag");
 		if (!pDefaultShaderProgram)
 		{
 			std::cerr << "Can't Create Shader Program: " << "DefaultShader" << std::endl;
 			return -1;
 		}
 		
-		GLuint points_vbo = 0;
-		glGenBuffers(1, &points_vbo);
-		glBindBuffer(GL_ARRAY_BUFFER, points_vbo);
+		resourceManager.loadTexture("DefaultTexture", "res/textures/brick_wall.png");
+		
+		//int indicesSize = sizeof(indices)/sizeof(GLuint);
+		//int colorsSize = sizeof(colors)/sizeof(GLfloat);
+		//int pointSize = sizeof(point)/sizeof(GLfloat);
+		
+		GLuint vbo = 0;
+		glGenBuffers(1, &vbo);
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(point), point, GL_STATIC_DRAW);
-
-		GLuint colors_vbo = 0;
-		glGenBuffers(1, &colors_vbo);
-		glBindBuffer(GL_ARRAY_BUFFER, colors_vbo);
+		checkGLError();
+		
+		GLuint cvbo = 0;
+		glGenBuffers(1, &cvbo);
+		glBindBuffer(GL_ARRAY_BUFFER, cvbo);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
+		checkGLError();
+
+		GLuint ebo = 0;
+		glGenBuffers(1, &ebo);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		checkGLError();
 
 		GLuint vao = 0;
 		glGenVertexArrays(1, &vao);
 		glBindVertexArray(vao);
-
+		
 		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, points_vbo);
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 
 		glEnableVertexAttribArray(1);
-		glBindBuffer(GL_ARRAY_BUFFER, colors_vbo);
+		glBindBuffer(GL_ARRAY_BUFFER, cvbo);
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-
-		while (!glfwWindowShouldClose(window)) {
-			glfwPollEvents();
-
+		
+		
+		while (!glfwWindowShouldClose(window)) 
+		{
 			glClear(GL_COLOR_BUFFER_BIT);
-
 			pDefaultShaderProgram->use();
-			glBindVertexArray(vao);
-			glDrawArrays(GL_TRIANGLES, 0, 3);
-
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 			glfwSwapBuffers(window);
+			glfwPollEvents();
 		}
 	}
 	glfwTerminate();
 	return 0;
 }
-
