@@ -18,7 +18,7 @@ GLfloat colors[] = {
 	0.0f, 0.0f, 1.0f,   //blue
 	1.0f, 1.0f, 1.0f    //white
 };
-GLuint indices[] = { 0,1,2,0,2,3 };
+GLuint indices[] = { 0,1,2,3 };
 
 unsigned int HEIGHT = 600;
 unsigned int WIDTH = 600;
