@@ -8,9 +8,9 @@ using namespace std;
 
 GLfloat point[] = {
 	0.5f, 0.5f, 0.0f,     //0
-	-0.5f, 0.5f, 0.0f,    //1
+	0.5f, -0.5f, 0.0f,    //1
 	-0.5f, -0.5f, 0.0f,   //2
-	0.5f, -0.5f, 0.0f,    //3
+	-0.5f, 0.5f, 0.0f,    //3
 };
 GLfloat colors[] = {
 	1.0f, 0.0f, 0.0f,   //red
